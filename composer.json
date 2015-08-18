@@ -1,0 +1,12 @@
+{
+    "name": "deft/filesystem",
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/symfony": "^2.1",
+		"league/flysystem": "^1.0",
+		"oneup/flysystem-bundle": "^1.1",
+		"doctrine/orm": "^2.5",
+		"doctrine/doctrine-bundle": "^1.2",
+		"swiftmailer/swiftmailer": "^5.0"
+	}
+}

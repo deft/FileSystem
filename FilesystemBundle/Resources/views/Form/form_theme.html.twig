@@ -1,0 +1,52 @@
+{% block deft_file_upload_widget %}
+    <div class="deft-file-upload">
+        {% if form.vars.file_id %}
+            <a class="deft-file-upload-btn"><i class="icon-trash"></i></a>
+            <div class="deft-file-upload-name">{{ form.vars.file_id | file_metadata_filename }}</div>
+            <div class="deft-file-upload-form">{{ form_widget(form.fileId) }}</div>
+            <div class="deft-file-upload-deleted">{{ form_widget(form.isDeleted) }}</div>
+            <div class="deft-file-upload-saving">{{ form_widget(form.savedFileId) }}</div>
+        {% else %}
+            {{ form_widget(form.fileId) }}
+            {{ form_widget(form.isDeleted) }}
+            {{ form_widget(form.savedFileId) }}
+        {% endif %}
+        <style>
+            .deft-file-upload-btn, .deft-file-upload-name {
+                padding-top: 5px;
+            }
+            .deft-file-upload-btn {
+                cursor: pointer;
+                float: left;
+                margin-right: 10px;
+            }
+            .deft-file-upload-btn:hover { text-decoration: none; }
+            .deft-file-upload-form {
+                display: none;
+            }
+        </style>
+        <script>
+            $(function() {
+                $('.deft-file-upload').each(function() {
+                    var self = $(this);
+                    if (self.data('initialised')) return;
+                    self.data('initialised', 'true');
+
+                    var emptyBtn = self.find('.deft-file-upload-btn');
+                    var fileForm = self.find('.deft-file-upload-form');
+                    var fileName = self.find('.deft-file-upload-name');
+                    var deletedInput = self.find('.deft-file-upload-deleted input');
+                    var savingInput = self.find('.deft-file-upload-saving input');
+                    emptyBtn.click(function(e) {
+                        e.preventDefault();
+                        fileForm.show();
+                        fileName.hide();
+                        emptyBtn.hide();
+                        deletedInput.val(true);
+                        savingInput.val(null);
+                    });
+                });
+            });
+        </script>
+    </div>
+{% endblock %}

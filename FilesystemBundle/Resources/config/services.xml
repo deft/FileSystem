@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="deft.filesystem_adapter.symfony.security.security_context_file_creator_provider"
+                 class="Deft\FilesystemAdapter\Symfony\Security\SecurityContextFileCreatorProvider">
+            <argument type="service" id="security.context" />
+        </service>
+        <service id="deft.filesystem_adapter.doctrine.repository.doctrine_file_repository"
+                 class="Deft\FilesystemAdapter\Doctrine\Repository\DoctrineFileRepository">
+            <argument type="service" id="doctrine" />
+        </service>
+        <service id="deft.filesystem_adapter.flysystem.flysystem_storage_writer"
+                 class="Deft\FilesystemAdapter\Flysystem\FlysystemStorageWriter">
+            <argument type="service" id="oneup_flysystem.my_filesystem_filesystem" />
+        </service>
+        <service id="deft.filesystem_adapter.flysystem.flysystem_storage_reader"
+                 class="Deft\FilesystemAdapter\Flysystem\FlysystemStorageReader">
+            <argument type="service" id="oneup_flysystem.my_filesystem_filesystem" />
+        </service>
+        <service id="deft.filesystem.writing.file_writer"
+                 class="Deft\Filesystem\Writing\FileWriter">
+            <argument type="service" id="deft.filesystem_adapter.symfony.security.security_context_file_creator_provider" />
+            <argument type="service" id="deft.filesystem_adapter.doctrine.repository.doctrine_file_repository" />
+            <argument type="service" id="deft.filesystem_adapter.flysystem.flysystem_storage_writer" />
+        </service>
+        <service id="deft.filesystem.reading.file_reader"
+                 class="Deft\Filesystem\Reading\FileReader">
+            <argument type="service" id="deft.filesystem_adapter.flysystem.flysystem_storage_reader" />
+            <argument type="service" id="deft.filesystem_adapter.doctrine.repository.doctrine_file_repository" />
+        </service>
+        <service id="deft.filesystem_adapter.liip_imagine.data_loader"
+                 class="Deft\FilesystemAdapter\LiipImagine\DataLoader">
+            <argument type="service" id="deft.filesystem.reading.file_reader" />
+            <argument type="service" id="liip_imagine.binary.mime_type_guesser" />
+            <tag name="liip_imagine.binary.loader" loader="deft_filesystem" />
+        </service>
+        <service id="deft.filesystem_adapter.twig.filesystem_filter"
+                 class="Deft\FilesystemAdapter\Twig\FilesystemFilter">
+            <argument type="service" id="deft.filesystem.reading.file_reader" />
+            <tag name="twig.extension" />
+        </service>
+        <service id="deft.filesystem_adapter.symfony.form.data_transformer.uploaded_file_to_file_id_transformer_factory"
+                 class="Deft\FilesystemAdapter\Symfony\Form\DataTransformer\UploadedFileToFileIdTransformerFactory">
+            <argument type="service" id="deft.filesystem.writing.file_writer" />
+        </service>
+        <service id="deft.filesystem_adapter.symfony.form.type.file_upload_type"
+                 class="Deft\FilesystemAdapter\Symfony\Form\Type\FileUploadType">
+            <argument type="service" id="deft.filesystem_adapter.symfony.form.type.file_upload_internal_type" />
+            <tag name="form.type" alias="deft_file_upload" />
+        </service>
+        <service id="deft.filesystem_adapter.symfony.form.type.file_upload_internal_type"
+                 class="Deft\FilesystemAdapter\Symfony\Form\Type\FileUploadInternalType">
+            <argument type="service" id="deft.filesystem_adapter.symfony.form.data_transformer.uploaded_file_to_file_id_transformer_factory" />
+            <tag name="form.type" alias="deft_file_upload_internal" />
+        </service>
+        <service id="deft.filesystem_adapter.swiftmailer.attachment_factory"
+                class="Deft\FilesystemAdapter\Swiftmailer\AttachmentFactory">
+            <argument type="service" id="deft.filesystem.reading.file_reader"/>
+        </service>
+    </services>
+</container>

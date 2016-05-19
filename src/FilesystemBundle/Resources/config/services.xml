@@ -4,9 +4,9 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="deft.filesystem_adapter.symfony.security.security_context_file_creator_provider"
-                 class="Deft\FilesystemAdapter\Symfony\Security\SecurityContextFileCreatorProvider">
-            <argument type="service" id="security.context" />
+        <service id="deft.filesystem_adapter.symfony.security.token_storage_file_creator_provider"
+                 class="Deft\FilesystemAdapter\Symfony\Security\TokenStorageFileCreatorProvider">
+            <argument type="service" id="security.token_storage" />
         </service>
         <service id="deft.filesystem_adapter.doctrine.repository.doctrine_file_repository"
                  class="Deft\FilesystemAdapter\Doctrine\Repository\DoctrineFileRepository">
@@ -22,7 +22,7 @@
         </service>
         <service id="deft.filesystem.writing.file_writer"
                  class="Deft\Filesystem\Writing\FileWriter">
-            <argument type="service" id="deft.filesystem_adapter.symfony.security.security_context_file_creator_provider" />
+            <argument type="service" id="deft.filesystem_adapter.symfony.security.token_storage_file_creator_provider" />
             <argument type="service" id="deft.filesystem_adapter.doctrine.repository.doctrine_file_repository" />
             <argument type="service" id="deft.filesystem_adapter.flysystem.flysystem_storage_writer" />
         </service>

@@ -35,7 +35,8 @@ class DeftFilesystemExtension extends Extension implements PrependExtensionInter
                                 'type' => 'xml',
                                 'dir' => realpath(sprintf("%s/../Resources/config/doctrine", __DIR__)),
                                 'prefix' => sprintf('Deft\\Filesystem'),
-                                'alias' => "DeftFilesystem"
+                                'alias' => "DeftFilesystem",
+                                'is_bundle' => false
                             ]
                         ]
                     ]
@@ -49,7 +50,7 @@ class DeftFilesystemExtension extends Extension implements PrependExtensionInter
         $this->checkBundle($container, 'TwigBundle');
 
         $container->prependExtensionConfig('twig', [
-            'form' => ['resources' => ['DeftFilesystemBundle:Form:form_theme.html.twig']]
+            'form_themes' => ['DeftFilesystemBundle:Form:form_theme.html.twig']
         ]);
     }
 

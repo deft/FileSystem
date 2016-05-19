@@ -4,13 +4,14 @@ namespace Deft\FilesystemAdapter\Symfony\Security;
 
 use Deft\Filesystem\FileCreator;
 use Deft\Filesystem\FileCreatorProvider;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class SecurityContextFileCreatorProvider implements FileCreatorProvider
 {
     private $securityContext;
 
-    public function __construct(SecurityContext $securityContext)
+    public function __construct(TokenStorage $securityContext)
     {
         $this->securityContext = $securityContext;
     }

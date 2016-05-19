@@ -6,7 +6,7 @@
     <services>
         <service id="deft.filesystem_adapter.symfony.security.security_context_file_creator_provider"
                  class="Deft\FilesystemAdapter\Symfony\Security\SecurityContextFileCreatorProvider">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="security.token_storage" />
         </service>
         <service id="deft.filesystem_adapter.doctrine.repository.doctrine_file_repository"
                  class="Deft\FilesystemAdapter\Doctrine\Repository\DoctrineFileRepository">

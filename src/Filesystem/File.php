@@ -5,13 +5,13 @@ namespace Deft\Filesystem;
 use DateTime;
 use Deft\Filesystem\Reading\FileContent;
 use Deft\Filesystem\Reading\FileStream;
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 class File
 {
     /** @var string */
     private $id;
-    public function getId() { return$this->id; }
+    public function getId() { return $this->id; }
 
     /** @var string */
     private $directory;
